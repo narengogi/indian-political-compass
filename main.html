@@ -3,23 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Indian Political Compass</title>
-<!--    <link rel="stylesheet" href="styles/paper.css">-->
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/pre.js"></script>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <meta property="og:title" content="Indian Political Compass Test">
+    <meta property="og:description" content="Find out where you stand in the Indian political spectrum.">
+    <meta property="og:image" content="assets/political-compass.svg">
+    <meta property="og:url" content="https://naths.in">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Goldman:wght@400;700&family=Pixelify+Sans:wght@400..700&family=Victor+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+          rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Goldman:wght@400;700&family=Pixelify+Sans:wght@400..700&display=swap"
+          rel="stylesheet">
 </head>
 <body>
-<div>
-    Description
+<div id="title">
+    Indian Political Compass
 </div>
-<div>
+<div id="header">
+    <div id="disclaimer">
+        <div id="disclaimer-title">Disclaimer</div>
+        <div id="disclaimer-text">
+            This test is not affiliated with any political party or organization. The questions are based on the
+            political landscape of India, and are not meant to be taken as a definitive measure of your political
+            beliefs.
+        </div>
+    </div>
     <div>
+        <div>
+            <a href="changelog.txt">Changelog</a>
+        </div>
+    </div>
+</div>
+<div id="questions-container">
+    <div id="questions-title">
         Questions
     </div>
     <form onsubmit="return handleFormSubmit(event)" id="surveyForm">
 
     </form>
 </div>
-<div>
+<div style="display: none" id="resultCard">
     <object id="svgObject" data="assets/political-compass.svg" type="image/svg+xml"></object>
     <div>
         <img id="pepeImage"/>
@@ -33,6 +63,21 @@
         </a>
     </div>
 </footer>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2HS69JPMF9"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-2HS69JPMF9');
+</script>
+
 <script src="scripts/post.js"></script>
 </body>
 </html>

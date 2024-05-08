@@ -1,0 +1,69 @@
+* {
+    font-family: "Victor Mono", monospace;
+    font-optical-sizing: auto;
+}
+
+body {
+    background-color: antiquewhite;
+}
+
+#title {
+    font-family: "Goldman";
+    font-weight: 700;
+    font-size: 36px;
+    text-align: center;
+}
+
+#header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: #e77780 2px solid;
+    border-radius: 4px;
+    padding: 8px;
+    gap: 8px;
+}
+
+#disclaimer-title {
+    font-family: "Goldman";
+    font-weight: 400;
+    font-size: 16px;
+}
+
+#disclaimer-text {
+    font-size: 12px;
+    font-style: italic;
+}
+
+#questions-container {
+    padding: 8px;
+    border: #e77780 2px solid;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+#questions-title {
+    font-family: "Goldman";
+    font-weight: 400;
+    font-size: 18px;
+}
+
+#surveyForm {
+    margin-top: 8px;
+}
+
+#surveyForm #submit {
+    margin-top: 8px;
+}
+
+
+#resultCard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+
+footer {
+    text-align: end;
+}
