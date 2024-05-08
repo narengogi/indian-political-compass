@@ -109,7 +109,7 @@ const form = document.querySelector('form')
 questions.forEach(question => {
     const fieldset = document.createElement('fieldset')
     const legend = document.createElement('legend')
-    legend.textContent = question.questionText
+    legend.textContent = question.id+1 + "." + question.questionText
     fieldset.appendChild(legend)
     question.options.forEach(option => {
         const label = document.createElement('label')
@@ -117,6 +117,7 @@ questions.forEach(question => {
         input.type = 'radio'
         input.name = question.id
         input.value = option.id
+        input.required = true
         label.appendChild(input)
         label.appendChild(document.createTextNode(option.text))
         fieldset.appendChild(label)
@@ -127,6 +128,7 @@ questions.forEach(question => {
 const submit = document.createElement('input')
 submit.type = 'submit'
 submit.value = 'Submit'
+submit.id = 'submit'
 
 form.appendChild(submit)
 
@@ -139,25 +141,58 @@ const optionsMap = questions.reduce((acc, question) => {
 }, {})
 
 const rangesMap = [
-    {"name": "Liberal", "x": -0.5, "y": -0.5, "length": 0.5, "height": 0.5},
-    {"name": "Chamcha", "x": -0.5, "y": -1, "length": 0.75, "height": 0.5},
-    {"name": "NSE maximizer", "x": 0.25, "y": -1, "length": 0.75, "height": 0.5},
-    {"name": "Dalal", "x": 0.5, "y": -0.5, "length": 0.5, "height": 0.5},
-    {"name": "INA liberator", "x": 0.75, "y": -0.5, "length": 0.5, "height": 0.5},
-    {"name": "Bhakt", "x": 0.25, "y": 0.5, "length": 0.5, "height": 0.5},
-    {"name": "Andh Bhakt", "x": -0.25, "y": 0.5, "length": 0.5, "height": 0.5},
-    {"name": "Gandhian", "x": 0, "y": -0.5, "length": 0.5, "height": 1},
-    {"name": "Gandhian", "x": -0.5, "y": 0, "length": 0.5, "height": 0.5},
-    {"name": "Bhakt", "x": -0.75, "y": 0.5, "length": 0.5, "height": 0.5},
-    {"name": "Naxal", "x": -1, "y": 0, "length": 0.25, "height": 1},
+    {
+        "name": "Liberal", "x": -0.5, "y": -0.5, "length": 0.5, "height": 0.5,
+        "imageURL": "assets/liberal.webp", "description": "You are a libtard"
+    },
+    {
+        "name": "Chamcha", "x": -0.5, "y": -1, "length": 0.75, "height": 0.5,
+        imageURL: "assets/chamcha.webp", description: "You are a Chamcha"
+    },
+    {
+        "name": "NSE maximizer", "x": 0.25, "y": -1, "length": 0.75, "height": 0.5,
+        imageURL: "assets/nse-maximizer.webp", description: "You are an NSE maximizer"
+    },
+    {
+        "name": "Dalal", "x": 0.5, "y": -0.5, "length": 0.5, "height": 0.5,
+        "imageURL": "assets/dalal.webp", "description": "You are a Dalal"
+    },
+    {
+        "name": "INA liberator", "x": 0.75, "y": -0.5, "length": 0.5, "height": 0.5,
+        imageURL: "assets/liberator.webp", description: "You are an INA liberator"
+    },
+    {
+        "name": "Bhakt", "x": 0.25, "y": 0.5, "length": 0.5, "height": 0.5,
+        imageURL: "assets/bhakt.webp", description: "You are a Bhakt"
+    },
+    {
+        "name": "Andh Bhakt", "x": -0.25, "y": 0.5, "length": 0.5, "height": 0.5,
+        imageURL: "assets/andh-bhakt.webp", description: "You are an Andh Bhakt"
+    },
+    {
+        "name": "Gandhian", "x": 0, "y": -0.5, "length": 0.5, "height": 1,
+        imageURL: "assets/gandhian.webp", description: "You are a Gandhian"
+    },
+    {
+        "name": "Gandhian", "x": -0.5, "y": 0, "length": 0.5, "height": 0.5,
+        imageURL: "assets/gandhian.webp", description: "You are a Gandhian"
+    },
+    {
+        "name": "Bhakt", "x": -0.75, "y": 0.5, "length": 0.5, "height": 0.5,
+        imageURL: "assets/bhakt.webp", description: "You are a Bhakt"
+    },
+    {
+        "name": "Naxal", "x": -1, "y": 0, "length": 0.25, "height": 1,
+        imageURL: "assets/naxal.webp", description: "You are a Naxal"
+    },
     {"name": "Pink Card Holder", "x": -1, "y": -0.5, "length": 0.5, "height": 0.5},
     {"name": "Pink Card Holder", "x": -0.75, "y": 0, "length": 0.25, "height": 0.5},
     {"name": "Sadhu", "x": -1, "y": -1, "length": 0.5, "height": 0.5},
 ]
 
-console.log(rangesMap.reduce((acc, item) => {
-    return acc + (item.length * item.height)
-}, 0))
+// console.log(rangesMap.reduce((acc, item) => {
+//     return acc + (item.length * item.height)
+// }, 0))
 
 function getRange(x, y) {
     return rangesMap.find(range => {
@@ -165,21 +200,50 @@ function getRange(x, y) {
     })
 }
 
+function showResult(result) {
+
+    const resultCard = document.getElementById("resultCard")
+    resultCard.style.display = "block"
+
+    const pepeImage = document.getElementById("pepeImage")
+    pepeImage.setAttribute("src", result.imageURL)
+
+    const pepeText = document.getElementById("pepeText")
+    pepeText.textContent = result.description
+
+}
+
+function renderDot(x, y) {
+    const position = document.getElementById("svgObject").contentDocument.getElementById("position-dot")
+    const cx = 1320 * x / 10
+    const cy = 910 * y / 10
+    position.setAttribute("cx", cx.toString())
+    position.setAttribute("cy", cy.toString())
+}
+
+function callAnalytics(range, x, y) {
+    gtag('event', 'result', {
+        'event_category': 'result',
+        'event_label': range.name,
+        'x': x,
+        'y': y
+    });
+}
+
 function handleFormSubmit(event) {
     event.preventDefault()
     let x = 0;
     let y = 0;
-    console.log(event)
     const formData = new FormData(event.target)
-    console.log(formData)
     formData.forEach((value, key) => {
         const option = optionsMap[value]
         x += option.x
         y += option.y
     })
+    console.log(x, y)
     const range = getRange(x, y)
     console.log(range)
-    const position = document.getElementById("position-dot")
-    position.setAttribute("cx", "500")
-    position.setAttribute("cy", "500")
+    showResult(range)
+    renderDot(x, y)
+    callAnalytics(range, x, y)
 }
